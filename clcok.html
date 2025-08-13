@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>World Clock - Shivam</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Orbitron:wght@500&display=swap');
+
+  :root {
+    --contour-light: rgba(20, 20, 20, 0.8);
+    --contour-dark: rgba(255, 255, 255, 0.9);
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    text-align: center;
+    overflow-x: hidden;
+    transition: background 1s ease, color 0.8s ease;
+    position: relative;
+  }
+
+  body.light {
+    background: linear-gradient(270deg, #f5f7fa, #e2d1c3, #f5f7fa);
+    background-size: 600% 600%;
+    animation: gradientShift 30s ease infinite;
+    color: #222;
+  }
+  body.dark {
+    background: linear-gradient(270deg, #1a1a1a, #2d2d2d, #1a1a1a);
+    background-size: 600% 600%;
+    animation: gradientShift 30s ease infinite;
+    color: #eee;
+  }
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  header {
+    padding: 25px;
+    font-size: 2em;
+    font-weight: 600;
+    position: relative;
+    z-index: 3;
+  }
+  .greeting {
+    font-size: 1.2em;
+    opacity: 0.85;
+    margin-bottom: 8px;
+  }
+  .date {
+    font-size: 1em;
+    opacity: 0.75;
+    margin-bottom: 30px;
+  }
+
+  /* Contour world map layer with embedded SVG */
+  .contour-map {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    opacity: 0.10;
+    pointer-events: none;
+    background:
+      repeating-linear-gradient(135deg, var(--contour-color) 0 1px, transparent 1px 6px),
+      repeating-linear-gradient(45deg, var(--contour-color) 0 1px, transparent 1px 10px);
+    background-size: 500px 500px, 700px 700px;
+    animation: drift 60s linear infinite alternate;
+
+    -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2000 1001'><path fill='white' d='M0 0h2000v1001H0z'/><path fill='black' d='M0 0h2000v1001H0z M 1234 423 l 5 -2 l 1 -4 l 7 -1 l 4 -4 l 5 0 l 6 -5 l 2 -7 l 8 -8 l 9 -2 l 8 -6 l 3 -5 l -1 -9 l -4 -5 l 3 -6 l -1 -5 l 5 -3 l 3 -9 l 5 -1 l 2 -7 l 4 -4 l 0 -6 l 4 -8 l -2 -4 l 6 -6 l 1 -8 l -5 -5 l 0 -6 l 4 -7 l 2 -7 l 0 -6 l -2 -4 l -1 -9 l -6 -4 l -5 0 l -7 -5 l -9 0 l -5 4 l -5 -1 l -5 -3 l -5 0 l -3 -3 l -8 0 l -6 3 l -7 -2 l -3 3 l -6 -3 l -9 0 l -6 3 l -9 0 l -3 3 l -5 -3 l -6 0 l -5 -2 l -4 3 l -6 0 l -5 -3 l -4 0 l -4 -2 l -4 3 l -3 0 l -4 -2 l -3 3 l -4 -3 l -3 0 l -5 3 l -3 0 l -4 3 l -4 0 l -5 3 l -4 0 l -4 3 l -5 0 l -4 2 l -3 -2 l -4 0 l -5 3 l -3 0 l -4 3 l -5 0 l -4 3 l -4 0 l -5 2 l -3 -2 l -4 0 l -3 3 l -5 0 l -4 3 l -4 0 l -5 3 l -4 0 l -4 2 l -4 0 l -4 3 l -4 0 l -4 3 l -3 0 l -4 2 l -3 0 l -4 3 l -5 0 l -4 3 l -4 0 l -4 2 l -4 0 l -3 3 l -5 0 l -4 3 l -3 0 l -5 3 l -4 0 l -3 3 l -4 0 l -5 3 l -4 0 l -4 2 l -4 0 l -3 3 l -5 0 l -4 3 l -4 0 l -5 3 l -4 0 l -4 3 l -4 0 l -4 3 l -4 0 l -3 3 l -5 0 l -4 3 l -3 0 l -5 3 l -4 0 l -4 3 l -4 0 l -4 3 l -4 0 l -3 3 l -5 0 l -4 3 l -4 0 l -5 3 l -4 0 l -3 3 l -4 0 l -5 3 l -4 0 l -4 3 l -4 0 l -4 3 l -4 0 l -3 3 l -5 0 l -4 3 l -4 0 l -5 3 l -4 0 l -3 3 l -4 0 l -5 3 l -4 0 l -4 3 l -4 0 l -4 3 l -4 0 l -3 3 l -5 0 l -4 3 l -4 0 l -5 3 l -4 0 l -3 3 l -4 0 l -5 3 l -4 0 l -4 3 l -4 0 l -4 3 l -4 0 l -3 3 l -5 0 l -4 3 l -4 0 l -5 3 z'/></svg>");
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-size: cover;
+    -webkit-mask-position: center;
+    mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2000 1001'><path fill='white' d='M0 0h2000v1001H0z'/><path fill='black' d='M0 0h2000v1001H0z M 1234 423 ... z'/></svg>");
+    mask-repeat: no-repeat;
+    mask-size: cover;
+    mask-position: center;
+  }
+
+  @keyframes drift {
+    0%   { background-position: 0 0, 0 0; }
+    100% { background-position: 300px 0, -400px 0; }
+  }
+
+  .map-glow {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.25;
+    background:
+      radial-gradient(circle at 26% 38%, rgba(255,215,0,0.12) 0%, transparent 22%),
+      radial-gradient(circle at 76% 38%, rgba(0,191,255,0.12) 0%, transparent 22%);
+  }
+
+  .clock-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    max-width: 900px;
+    margin: auto;
+    z-index: 3;
+    position: relative;
+  }
+  .clock {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 20px;
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  }
+  .city {
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .time {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.6em;
+  }
+  .colon {
+    animation: smoothBlink 1.5s ease-in-out infinite;
+  }
+  @keyframes smoothBlink {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: 0; }
+  }
+
+  .weather, .quote {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 15px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(8px);
+    font-size: 1em;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    z-index: 3;
+    position: relative;
+  }
+  .weather-icon {
+    font-size: 2em;
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  body.light .contour-map { --contour-color: var(--contour-light); }
+  body.dark  .contour-map { --contour-color: var(--contour-dark); }
+</style>
+</head>
+<body>
+  <div class="contour-map"></div>
+  <div class="map-glow"></div>
+
+  <header>🌍 World Clock</header>
+  <div class="greeting" id="greeting"></div>
+  <div class="date" id="date"></div>
+
+  <div class="clock-container" id="clocks"></div>
+
+  <div class="weather" id="weather">
+    <span class="weather-icon" id="weather-icon">⏳</span>
+    <span id="weather-text">Loading Winnipeg weather...</span>
+  </div>
+
+  <div class="quote" id="quote">Loading quote...</div>
+
+<script>
+  const timeZones = [
+    { city: "Mountain (Calgary)", zone: "America/Edmonton" },
+    { city: "Central (Winnipeg)", zone: "America/Winnipeg" },
+    { city: "Eastern (Toronto)", zone: "America/Toronto" },
+    { city: "Zulu (UTC)", zone: "UTC" }
+  ];
+
+  function updateGreetingAndTheme() {
+    const now = new Date();
+    const hour = now.getHours();
+    document.getElementById("date").textContent = now.toLocaleDateString("en-US", {
+      weekday: "long", year: "numeric", month: "long", day: "numeric"
+    });
+
+    if (hour >= 5 && hour < 12) {
+      document.getElementById("greeting").textContent = "☀️ Good Morning, Shivam";
+      document.body.className = "light";
+    } else if (hour >= 12 && hour < 18) {
+      document.getElementById("greeting").textContent = "🌤️ Good Afternoon, Shivam";
+      document.body.className = "light";
+    } else {
+      document.getElementById("greeting").textContent = "🌙 Good Evening, Shivam";
+      document.body.className = "dark";
+    }
+  }
+
+  function initClocks() {
+    const container = document.getElementById("clocks");
+    timeZones.forEach(tz => {
+      const clockDiv = document.createElement("div");
+      clockDiv.className = "clock";
+      clockDiv.innerHTML = `
+        <div class="city">${tz.city}</div>
+        <div class="time" id="time-${tz.zone.replace(/\//g, "_")}">--<span class="colon">:</span>--</div>
+      `;
+      container.appendChild(clockDiv);
+    });
+  }
+
+  function updateClocks() {
+    timeZones.forEach(tz => {
+      const [hours, minutes] = new Date().toLocaleTimeString("en-GB", {
+        timeZone: tz.zone,
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false
+      }).split(":");
+      document.getElementById(`time-${tz.zone.replace(/\//g, "_")}`).innerHTML =
+        `${hours}<span class="colon">:</span>${minutes}`;
+    });
+  }
+
+  function fetchWeatherWinnipeg() {
+    fetch(`https://api.open-meteo.com/v1/forecast?latitude=49.8951&longitude=-97.1384&current_weather=true`)
+      .then(res => res.json())
+      .then(data => {
+        const w = data.current_weather;
+        let icon = "🌤️";
+        if (w.weathercode < 3) icon = "☀️";
+        else if (w.weathercode < 50) icon = "🌤️";
+        else if (w.weathercode < 70) icon = "🌧️";
+        else if (w.weathercode < 80) icon = "❄️";
+        else icon = "⛅";
+        document.getElementById("weather-icon").textContent = icon;
+        document.getElementById("weather-text").textContent =
+          `${w.temperature}°C | ${w.windspeed} km/h | Central Time (Winnipeg)`;
+      })
+      .catch(() => {
+        document.getElementById("weather-text").textContent = "Unable to fetch Winnipeg weather";
+        document.getElementById("weather-icon").textContent = "⚠️";
+      });
+  }
+
+  function fetchQuote() {
+    fetch("https://zenquotes.io/api/random")
+      .then(res => res.json())
+      .then(data => {
+        const quoteText = data[0]?.q || "Time is precious — use it wisely.";
+        const quoteAuthor = data[0]?.a || "Unknown";
+        document.getElementById("quote").textContent = `💬 "${quoteText}" — ${quoteAuthor}`;
+      })
+      .catch(() => {
+        document.getElementById("quote").textContent = "💬 Time is precious — use it wisely.";
+      });
+  }
+
+  function rotateQuotes() {
+    fetchQuote();
+    setInterval(fetchQuote, 30000);
+  }
+
+  function refresh() {
+    updateGreetingAndTheme();
+    updateClocks();
+  }
+
+  initClocks();
+  fetchWeatherWinnipeg();
+  rotateQuotes();
+  refresh();
+  setInterval(refresh, 60000);
+</script>
+</body>
+</html>
