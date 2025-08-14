@@ -7,37 +7,27 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Orbitron:wght@500&display=swap');
 
-  :root {
-    --contour-light: rgba(20, 20, 20, 0.8);
-    --contour-dark: rgba(255, 255, 255, 0.9);
-  }
-
   body {
     margin: 0;
     padding: 0;
     font-family: 'Inter', sans-serif;
     text-align: center;
     overflow-x: hidden;
-    transition: background 1s ease, color 0.8s ease;
+    color: white;
+    background: url('https://images.pexels.com/photos/912050/pexels-photo-912050.jpeg?auto=compress&cs=tinysrgb&w=3840&h=2160&dpr=1') 
+                no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
     position: relative;
   }
 
-  body.light {
-    background: linear-gradient(270deg, #f5f7fa, #e2d1c3, #f5f7fa);
-    background-size: 600% 600%;
-    animation: gradientShift 30s ease infinite;
-    color: #222;
-  }
-  body.dark {
-    background: linear-gradient(270deg, #1a1a1a, #2d2d2d, #1a1a1a);
-    background-size: 600% 600%;
-    animation: gradientShift 30s ease infinite;
-    color: #eee;
-  }
-  @keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+  /* Dark overlay for readability */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 0;
   }
 
   header {
@@ -45,58 +35,27 @@
     font-size: 2em;
     font-weight: 600;
     position: relative;
-    z-index: 3;
+    z-index: 2;
   }
+
+  .greeting, .date {
+    position: relative;
+    z-index: 2;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.6);
+  }
+
   .greeting {
     font-size: 1.2em;
-    opacity: 0.85;
+    opacity: 0.9;
     margin-bottom: 8px;
   }
   .date {
     font-size: 1em;
-    opacity: 0.75;
+    opacity: 0.85;
     margin-bottom: 30px;
   }
 
-  /* Contour world map layer with embedded SVG */
-  .contour-map {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    opacity: 0.10;
-    pointer-events: none;
-    background:
-      repeating-linear-gradient(135deg, var(--contour-color) 0 1px, transparent 1px 6px),
-      repeating-linear-gradient(45deg, var(--contour-color) 0 1px, transparent 1px 10px);
-    background-size: 500px 500px, 700px 700px;
-    animation: drift 60s linear infinite alternate;
-
-    -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2000 1001'><path fill='white' d='M0 0h2000v1001H0z'/><path fill='black' d='M0 0h2000v1001H0z M 1234 423 l 5 -2 l 1 -4 l 7 -1 l 4 -4 l 5 0 l 6 -5 l 2 -7 l 8 -8 l 9 -2 l 8 -6 l 3 -5 l -1 -9 l -4 -5 l 3 -6 l -1 -5 l 5 -3 l 3 -9 l 5 -1 l 2 -7 l 4 -4 l 0 -6 l 4 -8 l -2 -4 l 6 -6 l 1 -8 l -5 -5 l 0 -6 l 4 -7 l 2 -7 l 0 -6 l -2 -4 l -1 -9 l -6 -4 l -5 0 l -7 -5 l -9 0 l -5 4 l -5 -1 l -5 -3 l -5 0 l -3 -3 l -8 0 l -6 3 l -7 -2 l -3 3 l -6 -3 l -9 0 l -6 3 l -9 0 l -3 3 l -5 -3 l -6 0 l -5 -2 l -4 3 l -6 0 l -5 -3 l -4 0 l -4 -2 l -4 3 l -3 0 l -4 -2 l -3 3 l -4 -3 l -3 0 l -5 3 l -3 0 l -4 3 l -4 0 l -5 3 l -4 0 l -4 3 l -5 0 l -4 2 l -3 -2 l -4 0 l -5 3 l -3 0 l -4 3 l -5 0 l -4 3 l -4 0 l -5 2 l -3 -2 l -4 0 l -3 3 l -5 0 l -4 3 l -4 0 l -5 3 l -4 0 l -4 2 l -4 0 l -4 3 l -4 0 l -4 3 l -3 0 l -4 2 l -3 0 l -4 3 l -5 0 l -4 3 l -4 0 l -4 2 l -4 0 l -3 3 l -5 0 l -4 3 l -3 0 l -5 3 l -4 0 l -3 3 l -4 0 l -5 3 l -4 0 l -4 2 l -4 0 l -3 3 l -5 0 l -4 3 l -4 0 l -5 3 l -4 0 l -4 3 l -4 0 l -4 3 l -4 0 l -3 3 l -5 0 l -4 3 l -3 0 l -5 3 l -4 0 l -4 3 l -4 0 l -4 3 l -4 0 l -3 3 l -5 0 l -4 3 l -4 0 l -5 3 l -4 0 l -3 3 l -4 0 l -5 3 l -4 0 l -4 3 l -4 0 l -4 3 l -4 0 l -3 3 l -5 0 l -4 3 l -4 0 l -5 3 l -4 0 l -3 3 l -4 0 l -5 3 l -4 0 l -4 3 l -4 0 l -4 3 l -4 0 l -3 3 l -5 0 l -4 3 l -4 0 l -5 3 l -4 0 l -3 3 l -4 0 l -5 3 l -4 0 l -4 3 l -4 0 l -4 3 l -4 0 l -3 3 l -5 0 l -4 3 l -4 0 l -5 3 z'/></svg>");
-    -webkit-mask-repeat: no-repeat;
-    -webkit-mask-size: cover;
-    -webkit-mask-position: center;
-    mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2000 1001'><path fill='white' d='M0 0h2000v1001H0z'/><path fill='black' d='M0 0h2000v1001H0z M 1234 423 ... z'/></svg>");
-    mask-repeat: no-repeat;
-    mask-size: cover;
-    mask-position: center;
-  }
-
-  @keyframes drift {
-    0%   { background-position: 0 0, 0 0; }
-    100% { background-position: 300px 0, -400px 0; }
-  }
-
-  .map-glow {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 1;
-    opacity: 0.25;
-    background:
-      radial-gradient(circle at 26% 38%, rgba(255,215,0,0.12) 0%, transparent 22%),
-      radial-gradient(circle at 76% 38%, rgba(0,191,255,0.12) 0%, transparent 22%);
-  }
-
+  /* Clock container with glass effect */
   .clock-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -104,15 +63,15 @@
     padding: 20px;
     max-width: 900px;
     margin: auto;
-    z-index: 3;
     position: relative;
+    z-index: 2;
   }
   .clock {
     background: rgba(255, 255, 255, 0.15);
     padding: 20px;
     border-radius: 16px;
     backdrop-filter: blur(10px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
   }
   .city {
     font-weight: 600;
@@ -138,8 +97,8 @@
     background: rgba(255,255,255,0.15);
     backdrop-filter: blur(8px);
     font-size: 1em;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    z-index: 3;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    z-index: 2;
     position: relative;
   }
   .weather-icon {
@@ -147,16 +106,10 @@
     display: block;
     margin-bottom: 5px;
   }
-
-  body.light .contour-map { --contour-color: var(--contour-light); }
-  body.dark  .contour-map { --contour-color: var(--contour-dark); }
 </style>
 </head>
 <body>
-  <div class="contour-map"></div>
-  <div class="map-glow"></div>
-
-  <header>🌍 World Clock</header>
+  <header>✈️ World Clock</header>
   <div class="greeting" id="greeting"></div>
   <div class="date" id="date"></div>
 
@@ -186,13 +139,10 @@
 
     if (hour >= 5 && hour < 12) {
       document.getElementById("greeting").textContent = "☀️ Good Morning, Shivam";
-      document.body.className = "light";
     } else if (hour >= 12 && hour < 18) {
       document.getElementById("greeting").textContent = "🌤️ Good Afternoon, Shivam";
-      document.body.className = "light";
     } else {
       document.getElementById("greeting").textContent = "🌙 Good Evening, Shivam";
-      document.body.className = "dark";
     }
   }
 
@@ -266,11 +216,25 @@
     updateClocks();
   }
 
+  // Sync updates to exact minute
+  function startClockSync() {
+    refresh(); // instant update on load
+    const now = new Date();
+    const delay = (60 - now.getSeconds()) * 1000 - now.getMilliseconds();
+    setTimeout(function tick() {
+      refresh();
+      setInterval(refresh, 60000);
+    }, delay);
+  }
+
+  // Initialize everything
   initClocks();
   fetchWeatherWinnipeg();
   rotateQuotes();
-  refresh();
-  setInterval(refresh, 60000);
+  startClockSync();
+
+  // Auto-refresh weather every hour
+  setInterval(fetchWeatherWinnipeg, 3600000);
 </script>
 </body>
 </html>
